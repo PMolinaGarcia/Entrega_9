@@ -1,0 +1,249 @@
+12.4. Ordenación de estructuras lineales
+
+
+12.4.1. Inserción directa
+
+Ejercicio 75. Explique apoyándose en un ejemplo cómo funciona el método de inserción directa.
+
+El método de inserción directa funciona de tal manera que se compara el elemento que tenemos con el anterior: si es el primero, ya se toma como ordenado, por lo que pasamos al siguiente, y respecto al anterior se ordena, colocándose a izquierda o derecha. Esto ocurre sucesivamente hasta que todo se encuentra ordenado. Funciona igual que como cuando ordenamos las cartas que tenemos cuando jugamos a un juego de mesa.
+
+Ejercicio 76. Calcule la complejidad asintótica temporal para el peor caso del método de inserción directa.
+
+El peor caso posible para la inserción directa se da cuando nos encontramos con un array que está ordenado, pero al revés de como nos interesa. Encontraremos una complejidad asintótica temporal de O(n^2), puesto que cada elemento i hará un número i de operaciones.
+
+Ejercicio 77. ¿Cuándo se usa el método de inserción directa? Justifique la respuesta.
+
+Se puede utilizar para listas pequeñas o que ya están casi ordenadas, porque en esos casos es más eficiente que otros algoritmos. Por la misma razón, otros algoritmos como Quicksort o MergeSort pueden utilizarlo como subalgoritmo por eficiencia práctica.
+
+Ejercicio 78. Explique el código del algoritmo de inserción directa proporcionado por el libro que aparece en la bibliografía básica de la asignatura.
+
+Desde i  1 hasta n-1                               //Los elementos por posición en los que se aplica.
+	carta  T[i]                                //Tomamos como elemento actual el de la posición en que nos encontramos.
+	j  T[i-1]                                  //Tomamos como segundo elemento el que se encuentra en la posición anterior con respecto a la actual.
+	Mientras j >= 0 y mientras T[j] > carta      //Si el elemento anterior es mayor que el actual, 
+		T[j+1]  T[j]                       //lo insertamos en la siguiente posición
+		j  j-1                             //y ahora pasamos el segundo índice como el anterior al anterior.
+	T[j+1]  carta                              //El siguiente elemento pasa a ser el actual y repetimos.
+
+
+12.4.2. Mergesort
+
+Ejercicio 79. Explique apoyándose en un ejemplo cómo funciona el método mergesort. ¿A quién se atribuye la invención del método?
+
+El mergesort se basa en la división de una lista por la mitad y la ordenación de dichas listas para luego, una vez ordenadas, juntarlas (merge) insertando los elementos de ambas ordenadamente. Es una estrategia "divide y vencerás". El orden de las sublistas se produce mediante una recursividad que puede ser inducida en otros algoritmos de ordenación. Se le atribuye a John Von Neumann.
+
+Ejercicio 80. Calcule la complejidad asintótica temporal para el peor caso del método mergesort.
+
+Dado que ordena como un árbol, que lo hace de forma logarítmica, y luego tiene que hacer la inserción de los n elementos, su complejidad es O(nlogn).
+
+Ejercicio 81. Explique el código del algoritmo mergesort proporcionado por el libro que aparece en la bibliografía básica de la asignatura.
+
+n = len(L)                          //Asignamos la longitud de la lista L a una variable n
+si n <= 1 entonces                  //Si la lista está vacía o solo tiene un elemento, nos lo devuelve; no le hace falta ordenar nada.
+    return L
+fin si                              
+
+medio = n / 2                       //Buscamos el elemento que se encuentra en el medio de la lista
+izquierda = lista[0:medio]          //Llamamos a los elementos desde el de posición 0 hasta el del medio "izquierda"
+derecha = lista[medio:n-1]          //Llamamos a los elementos desde el del medio hasta el del final "derecha"
+
+izquierda = mergeSort(izquierda)    //Ordenamos los elementos de la lista de elementos de la izquierda
+derecha = mergeSort(derecha)        //Ordenamos los elementos de la lista de elementos de la derecha
+
+return merge(izquierda, derecha)    //Se nos retorna la lista total ordenada
+
+
+12.4.3. Timsort
+
+Ejercicio 82. Realice los siguientes apartados sobre el algoritmo timsort:
+
+1. Explique qué es un run.
+
+Es una subsecuencia ordenada dentro del array original. Se utilizan para aprovechar aquellos elementos que puedan estar ya ordenados (en una toma de datos real es normal que se dé el caso).
+
+2. Explique qué es el minrun.
+
+Es la longitud mínima que debe tener un run para que sea considerado como tal.
+
+3. Explique a partir de un ejemplo cómo funciona el algoritmo de inserción binaria.
+
+Se recorre el array desde el segundo elemento; para cada elemento, se busca la posición correcta usando búsqueda binaria en la parte ya ordenada y se inserta el elemento en esa posición desplazando los elementos necesarios hacia la derecha.
+
+4. Explique con ejemplos cómo funciona el timsort.
+
+
+
+5. ¿Quién inventó el algoritmo?
+
+
+
+6. ¿Qué complejidad tiene?
+
+
+
+12.4.4. Quicksort
+
+Ejercicio 83. Explique apoyándose en un ejemplo cómo funciona el método quicksort. ¿Quién inventó el método?
+
+
+
+Ejercicio 84. Explique el código del algoritmo quicksort proporcionado por el libro que aparece en la bibliografía básica de la asignatura.
+
+
+
+Ejercicio 85. Calcule las siguientes complejidades del método quicksort:
+
+1. Caso mejor.
+
+
+
+2. Caso peor.
+
+
+
+3. Caso promedio.
+
+
+
+Ejercicio 86. ¿Qué significa que el quicksort no es estable?
+
+
+
+12.4.5. Ejemplos de ejecución de algoritmos de ordenación
+
+Ejercicio 87. Para cada uno de los siguientes arrays, muestre su contenido a través de los diferentes pasos para los algoritmos de inserción directa, Mergesort y Quicksort.
+
+1. (5, 3, 4, 8, 1, 9).
+
+
+
+2. (1, 5, 2, 4, 7, 12, 10, 9).
+
+
+
+3. (1, 4, 7, 9, 2, 5, 8, 10).
+
+
+
+12.4.6. Límite inferior en la complejidad de la ordenación
+
+Ejercicio 88. Se pide calcular el límite inferior de la complejidad de los algoritmos de ordenación basados en comparaciones.
+
+
+
+
+12.4.7. Los métodos sort en Java
+
+Ejercicio 89. Explique qué algoritmos de ordenación utiliza Java y en qué casos.
+
+
+
+Ejercicio 90. Escriba, compile y ejecute el siguiente código y explíquelo:
+
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+public class CompararEnteros
+{
+public static void main(String[] args)
+{
+List<Integer> lista = Arrays.asList(23, -2, 14, 3, 12, 8);
+Collections.sort(lista);
+System.out.println(lista);
+}
+}
+Ejercicio 91. Escriba el siguiente programa y ejecútelo:
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+public class Persona implements Comparable<Persona>{
+private String nombre;
+private LocalDate fechaNacimiento;
+public String getNombre() {
+return nombre;
+}
+public int compareTo(Persona persona){
+return this.nombre.compareTo(persona.nombre);
+}
+@Override
+public String toString() {
+DateTimeFormatter formatter = DateTimeFormatter.
+ofPattern("dd/MM/yyyy");
+return "Persona{" +
+"nombre = " + getNombre() +
+"fecha nacimiento = " + fechaNacimiento.format(
+formatter);
+}
+public Persona(String nombre, int dia, int mes, int anno) {
+this.nombre = nombre;
+this.fechaNacimiento = LocalDate.of(anno, mes, dia);
+}
+public LocalDate getFechaNacimiento() {
+return fechaNacimiento;
+}
+public int calcularEdad(){
+return Period.between(fechaNacimiento, LocalDate.now())
+.getYears();
+}
+}
+
+
+
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+public class Principal{
+public static void main(String[] args)
+{
+Persona juan = new Persona("Juan García Rodríguez", 13,
+2, 1980);
+Persona pepe = new Persona("José López Pérez", 4, 10,
+1950);
+Persona maria = new Persona("María Sánchez Martínez",
+5, 7, 2004);
+List<Persona> lista = Arrays.asList(juan, pepe, maria);
+Collections.sort(lista);
+System.out.println("Ordenación por nombres: " + lista);
+}
+}
+
+
+
+import java.util.Comparator;
+public class ComparadorEdades implements Comparator<Persona>{
+public int compare(Persona persona1, Persona persona2){
+return persona1.calcularEdad() - persona2.calcularEdad
+();
+}
+}
+
+
+
+Y modifique la clase Principal.java para que quede tal y como se muestra
+a continuación:
+
+
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+public class Principal{
+public static void main(String[] args)
+{
+Persona juan = new Persona("Juan García Rodríguez", 13,
+2, 1980);
+Persona pepe = new Persona("José López Pérez", 4, 10,
+1950);
+Persona maria = new Persona("María Sánchez Martínez",
+5, 7, 2004);
+List<Persona> lista = Arrays.asList(juan, pepe, maria);
+Collections.sort(lista);
+System.out.println("Ordenación por nombres: " + lista);
+Collections.sort(lista, new ComparadorEdades());
+System.out.println("Ordenación por edades: " + lista);
+}
+}
+
