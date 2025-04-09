@@ -67,47 +67,57 @@ Es la longitud mínima que debe tener un run para que sea considerado como tal.
 
 3. Explique a partir de un ejemplo cómo funciona el algoritmo de inserción binaria.
 
-Se recorre el array desde el segundo elemento; para cada elemento, se busca la posición correcta usando búsqueda binaria en la parte ya ordenada y se inserta el elemento en esa posición desplazando los elementos necesarios hacia la derecha.
+Se recorre el array desde el segundo elemento; para cada elemento, se busca la posición correcta usando búsqueda binaria en la parte ya ordenada y se inserta el elemento en esa posición desplazando los elementos necesarios hacia la derecha. Si tenemos [4,1,3,5,2,6], se comienza con [4,1], que se ordena a [1,4]; después, se evalúa el 3, que, como es menor que cuatro, pero mayor que 1, se introduce entre medias, quedando [1,3,4]; con el 5, [1,3,4,5]; con el 2, [1,2,3,4,5]; finalmente, con el 6, [1,2,3,4,5,6].
 
 4. Explique con ejemplos cómo funciona el timsort.
 
-
+El timsort es un algoritmo de ordenación que combina la inserción directa con el mergesort, dando lugar a una ordenación del orden de O(nlogn). 
+Si tenemos el siguiente array: [1, 2, 3, 10, 5, 4, 6, 7, 20], mediante el algoritmo se detectan los runs, que son pequeñas secuencias ordenadas dentro de un array, y en este caso obtenemos [1, 2, 3, 10], [5, 4] y [6, 7, 20]. El primero y el último están ordenados, y el del medio está al revés, por lo que se le da la vuelta; después, mediante mergesort, se juntan los runs insertándose los elementos por orden, resultando en: [1, 2, 3, 4, 5, 6, 7, 10, 20]
 
 5. ¿Quién inventó el algoritmo?
 
-
+Tim Peters
 
 6. ¿Qué complejidad tiene?
 
-
+O(nlogn)
 
 12.4.4. Quicksort
 
 Ejercicio 83. Explique apoyándose en un ejemplo cómo funciona el método quicksort. ¿Quién inventó el método?
 
+El Quicksort es un algoritmo de ordenación que se basa en la selección de un pivote a partir del cual se colocan los elementos menores a la izquierda y los mayores a la derecha, repitiéndose hasta tener todos ordenados.
 
+[8, 3, 1, 7, 0, 10, 2] --> Pivote 8: Quicksort([3,1,7,0,2]) + [8] + Quicksort([10]) --> Quicksort([1,0,2]) + [3] + Quicksort([7]) + [8] + [10] --> Quicksort[0] + [1] + Quicksort([2]) + [3] + [7] + [8] + [10] --> [0]+[1]+[2]+[3]+[7]+[8]+[10] --> [0,1,2,3,7,8,10]
 
 Ejercicio 84. Explique el código del algoritmo quicksort proporcionado por el libro que aparece en la bibliografía básica de la asignatura.
 
-
+QuickSort(T[i…j])
+    Si j - i + 1 <= umbral	    //Si es pequeño el array
+        OrdenaciónDirecta(T[i…j])   //que se ordene de forma directa
+    Sino
+        pivote ← ElegirPivote(T[i…j])      //Escogemos un pivote
+        Partición(T[i…j], pivote, iz, de)  //Hacemos partición en la lista, el número pivote, la lista de elementos de la izquierda y la de elementos de la derecha
+        QuickSort(T[i…de])                 //Ordenación de la lista de la derecha
+        QuickSort(T[iz…j])                 //Ordenación de la lista de la izquierda
 
 Ejercicio 85. Calcule las siguientes complejidades del método quicksort:
 
 1. Caso mejor.
 
-
+En el mejor caso, nos encontramos con que el pivote divide el array en dos partes iguales. Dado que cada llamada recursiva divide por la mitad el array, la complejidad de dicha operación queda como logn, pero, al tener que recorrer todos los elementos del array para hacer la partición, nos encontramos con una complejidad de n. Por lo tanto, la complejidad total es de O(nlogn).
 
 2. Caso peor.
 
-
+El peor caso se da cuando se elige un pivote que deja extremadamente desbalanceado el array, en una partición con muy pocos elementos y otra con muchos. En este caso, el algoritmo hace una cantidad de particiones parecida a la de una búsqueda secuencial: el número de comparaciones crece linealmente, pero se realiza una nueva partición en cada caso, por lo que se queda una complejidad de O(n^2).
 
 3. Caso promedio.
 
-
+El caso promedio tiende a parecerse más al mejor que al peor, puesto que se crean particiones bastante parecidas en cuanto al tamaño, pudiendo estimar una complejidad de logn; sin embargo, recorrer el array lleva una complejidad de n, por lo que la complejidad algorítmica total es de O(nlogn).
 
 Ejercicio 86. ¿Qué significa que el quicksort no es estable?
 
-
+Que modifica el orden natural de los elementos del array. Si hay dos elementos "iguales" que están puestos en un orden relativo, aunque haya elementos de por medio, para que sea estable, han de mantenerse en el mismo orden relativo.
 
 12.4.5. Ejemplos de ejecución de algoritmos de ordenación
 
