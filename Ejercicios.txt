@@ -86,9 +86,9 @@ O(nlogn)
 
 Ejercicio 83. Explique apoyándose en un ejemplo cómo funciona el método quicksort. ¿Quién inventó el método?
 
-El Quicksort es un algoritmo de ordenación que se basa en la selección de un pivote a partir del cual se colocan los elementos menores a la izquierda y los mayores a la derecha, repitiéndose hasta tener todos ordenados.
+El Quicksort es un algoritmo de ordenación que se basa en la selección de un pivote a partir del cual se colocan los elementos menores a la izquierda y los mayores a la derecha, repitiéndose dicho proceso hasta tener todos los elementos ordenados. Fue inventado por Tony Hoare.
 
-[8, 3, 1, 7, 0, 10, 2] --> Pivote 8: Quicksort([3,1,7,0,2]) + [8] + Quicksort([10]) --> Quicksort([1,0,2]) + [3] + Quicksort([7]) + [8] + [10] --> Quicksort[0] + [1] + Quicksort([2]) + [3] + [7] + [8] + [10] --> [0]+[1]+[2]+[3]+[7]+[8]+[10] --> [0,1,2,3,7,8,10]
+[8, 3, 1, 7, 0, 10, 2] --> Pivote 8: [Quicksort([3,1,7,0,2]),8,Quicksort([10])] --> [Quicksort([1,0,2]),3,Quicksort([7]),8,10] --> [Quicksort([0]),1,Quicksort([2]),3,7,8,10] --> [0,1,2,3,7,8,10]
 
 Ejercicio 84. Explique el código del algoritmo quicksort proporcionado por el libro que aparece en la bibliografía básica de la asignatura.
 
@@ -125,13 +125,27 @@ Ejercicio 87. Para cada uno de los siguientes arrays, muestre su contenido a tra
 
 1. (5, 3, 4, 8, 1, 9).
 
+Inserción directa: Cogemos el 5; ya está ordenado. Cogemos el 3 y comparamos con el 5; dado que es menor, lo colocamos delante: (3, 5, 4, 8, 1, 9). Cogemos el 4, lo comparamos con el 5; dado que es menor, lo ponemos delante: (3, 4, 5, 8, 1, 9); comparamos con el 3, y es mayor, por lo que ahí se queda. Cogemos el 8 y comparamos con el 5; es mayor, así que ahí se queda. Después, comparamos el 1 con el 8; como es menor, lo pasamos delante: (3, 4, 5, 1, 8, 9) --> (3, 4, 1, 5, 8, 9) --> (3, 1, 4, 5, 8, 9) --> (1, 3, 4, 5, 8, 9); tras comparar con el resto de elementos, lo pasamos hacia delante. Comparamos el 9 con el 8; dado que es mayor, mantiene su posición.
 
+Mergesort: (5, 3, 4, 8, 1, 9) --> MS(5, 3, 4) + MS(8, 1, 9) --> MS(5, 3) + MS(4) + MS(8) + MS(1, 9) --> MS(5) + MS(3) + MS(4) + MS(8) + MS(1) + MS(9) --> (5) + (3) + (4) + (8) + (1) + (9) --> (3, 5) + (4) + (8) + (1) + (9) --> (3, 4, 5) + (8) + (1) + (9) --> (3, 4, 5, 8) + (1) + (9) --> (1, 3, 4, 5, 8) + (9) --> (1, 3, 4, 5, 8, 9)
+
+Quicksort: (5, 3, 4, 8, 1, 9) Pivote 5 --> (3, 4, 1, 5, 8, 9) Pivote 3 --> (1, 3, 4, 5, 8, 9)
 
 2. (1, 5, 2, 4, 7, 12, 10, 9).
 
+Inserción directa: (1, 5, 2, 4, 7, 12, 10, 9) --> (1, 5, 2, 4, 7, 12, 10, 9) --> (1, 2, 5, 4, 7, 12, 10, 9) --> (1, 2, 4, 5, 7, 12, 10, 9) --> (1, 2, 4, 5, 7, 12, 10, 9) --> (1, 2, 4, 5, 7, 12, 10, 9) --> (1, 2, 4, 5, 7, 10, 12, 9) --> (1, 2, 4, 5, 7, 10, 9, 12) --> (1, 2, 4, 5, 7, 9, 10, 12)
 
+Mergesort: (1, 5, 2, 4, 7, 12, 10, 9) --> MS(1, 5, 2, 4) + MS(7, 12, 10, 9) --> MS(1, 5) + MS(2, 4) + MS(7, 12) + MS(10, 9) --> MS(1) + MS(5) + MS(2) + MS(4) + MS(7) + MS(12) + MS(10) + MS(9) --> (1)+(5)+(2)+(4)+(7)+(12)+(10)+(9) --> (1, 5)+(2)+(4)+(7)+(12)+(10)+(9) --> (1, 2, 5)+(4)+(7)+(12)+(10)+(9) --> (1, 2, 4, 5)+(7)+(12)+(10)+(9) --> (1, 2, 4, 5, 7)+(12)+(10)+(9) --> (1, 2, 4, 5, 7, 12)+(10)+(9) --> (1, 2, 4, 5, 7, 10, 12)+(9) --> (1, 2, 4, 5, 7, 9, 10, 12)
+
+Quicksort: (1, 5, 2, 4, 7, 12, 10, 9) Pivote 5 --> (1, 2, 4, 5, 7, 12, 10, 9) Pivote 10 --> (1, 2, 4, 5, 7, 9, 10, 12) 
 
 3. (1, 4, 7, 9, 2, 5, 8, 10).
+
+Inserción directa: (1, 4, 7, 9, 2, 5, 8, 10) --> (1, 4, 7, 9, 2, 5, 8, 10) --> (1, 4, 7, 9, 2, 5, 8, 10) --> (1, 4, 7, 9, 2, 5, 8, 10) --> (1, 4, 7, 2, 9, 5, 8, 10) --> (1, 4, 2, 7, 9, 5, 8, 10) --> (1, 2, 4, 7, 9, 5, 8, 10) --> (1, 2, 4, 7, 5, 9, 8, 10) --> (1, 2, 4, 5, 7, 9, 8, 10) --> (1, 2, 4, 5, 7, 8, 9, 10)
+
+Mergesort: (1, 4, 7, 9, 2, 5, 8, 10) --> MS(1, 4, 7, 9) + MS(2, 5, 8, 10) --> MS(1, 4) + MS(7, 9) + MS(2, 5) + MS(8, 10) --> MS(1) + MS(4) + MS(7) + MS(9) + MS(2) + MS(5) + MS(8) + MS(10) --> (1)+(4)+(7)+(9)+(2)+(5)+(8)+(10) --> (1, 4)+(7)+(9)+(2)+(5)+(8)+(10) --> (1, 4, 7)+(9)+(2)+(5)+(8)+(10) --> (1, 4, 7, 9)+(2)+(5)+(8)+(10) --> (1, 2, 4, 7, 9)+(5)+(8)+(10) --> (1, 2, 4, 5, 7, 9)+(8)+(10) --> (1, 2, 4, 5, 7, 8, 9)+(10) --> (1, 2, 4, 5, 7, 8, 9, 10)
+
+Quicksort: (1, 4, 7, 9, 2, 5, 8, 10) Pivote 5 --> (1, 4, 2, 5, 7, 9, 8, 10) Pivote 4 --> (1, 2, 4, 5, 7, 9, 8, 10) Pivote 9 --> (1, 2, 4, 5, 7, 8, 9, 10)
 
 
 
@@ -139,14 +153,17 @@ Ejercicio 87. Para cada uno de los siguientes arrays, muestre su contenido a tra
 
 Ejercicio 88. Se pide calcular el límite inferior de la complejidad de los algoritmos de ordenación basados en comparaciones.
 
-
+En los algoritmos de ordenación basados en comparaciones dividimos los arrays para comparar dentro de esos pequeños los elementos, por lo que, si por las divisiones tenemos una complejidad de logn y por las comparaciones entre elementos tenemos una complejidad de n, la complejidad total es de O(nlogn)
 
 
 12.4.7. Los métodos sort en Java
 
 Ejercicio 89. Explique qué algoritmos de ordenación utiliza Java y en qué casos.
 
+Java, según se esté trabajando con tipos primitivos o con objetos, utiliza dos tipos de algoritmos de ordenación:
 
+- Para tipos primitivos: Quicksort
+- Para objetos: Timsort (mergesort + inserción directa)
 
 Ejercicio 90. Escriba, compile y ejecute el siguiente código y explíquelo:
 
@@ -158,11 +175,12 @@ public class CompararEnteros
 {
 public static void main(String[] args)
 {
-List<Integer> lista = Arrays.asList(23, -2, 14, 3, 12, 8);
-Collections.sort(lista);
-System.out.println(lista);
+List<Integer> lista = Arrays.asList(23, -2, 14, 3, 12, 8); //Creamos una lista de objetos Integer
+        Collections.sort(lista);                                   //La ordenamos mediante un método que compara objetos, NO TIPOS PRIMITIVOS; por lo tanto, de acuerdo con el anterior ejercicio, se está utilizando Timsort
+        System.out.println(lista);                              //Imprimimos por pantalla la lista ordenada}
 }
-}
+
+
 Ejercicio 91. Escriba el siguiente programa y ejecútelo:
 
 import java.time.LocalDate;
